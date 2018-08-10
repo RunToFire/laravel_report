@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>myself</string>
+			<key>host</key>
+			<string>localhost</string>
+			<key>kcid</key>
+			<string>7182539829869419659</string>
+			<key>name</key>
+			<string>locahost</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPSocketConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>root</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>utf8mb4</string>
+			<key>contentFilter</key>
+			<dict/>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGOjtYJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoK8QDwcIFRYXGBkfICEoLDA0OFUkbnVs
+			bNMJCgsMEBRXTlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6MNDg+A
+			AoADgASjERITgAWABoAKgA5UdHlwZVRyb3dzVGtleXNfECZTZWxl
+			Y3Rpb25EZXRhaWxUeXBlUHJpbWFyeUtleWVkRGV0YWlsc9MJCgsa
+			HB6hG4AHoR2ACIAJUTEJ0iIjJCVaJGNsYXNzbmFtZVgkY2xhc3Nl
+			c18QE05TTXV0YWJsZURpY3Rpb25hcnmjJCYnXE5TRGljdGlvbmFy
+			eVhOU09iamVjdNIKCykroSqAC4AN0gstLi9ZTlMuc3RyaW5ngAxS
+			aWTSIiMxMl8QD05TTXV0YWJsZVN0cmluZ6MxMydYTlNTdHJpbmfS
+			IiM1Nl5OU011dGFibGVBcnJheaM1NydXTlNBcnJhedIiIyY5oiYn
+			XxAPTlNLZXllZEFyY2hpdmVy0Tw9VGRhdGGAAQAIABEAGgAjAC0A
+			MgA3AEkATwBWAF4AaQBwAHQAdgB4AHoAfgCAAIIAhACGAIsAkACV
+			AL4AxQDHAMkAywDNAM8A0QDSANcA4gDrAQEBBQESARsBIAEiASQB
+			JgErATUBNwE6AT8BUQFVAV4BYwFyAXYBfgGDAYYBmAGbAaAAAAAA
+			AAACAQAAAAAAAAA+AAAAAAAAAAAAAAAAAAABog==
+			</data>
+			<key>contentSortCol</key>
+			<string>name</string>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{1, 0}, {891, 574}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>table</key>
+			<string>users</string>
+			<key>view</key>
+			<string>SP_VIEW_CONTENT</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>223</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>SELECT o.id as tuoke_id,o.account as mobile,o.nickname as nickname,o.grade as grade,pi.entry_date as entry_date,o.person_status,wg.`name` as group_name, wg.`id` as group_id,gm.nickname as group_manager,gm.id as group_manager_id,
+            ws.`name` as work_site,ws.`id` as work_site_id,og.`nickname` as site_name,og.`id` as site_id,
+            wb.`name` as bankuai,os.nickname as bankuai_manager,os.id as bankuai_manager_id,
+            wa.`name` as area,ao.nickname as area_manager,ao.id as area_manager_id,da.`name` as city
+	  	FROM operator as o 
+		left join personnel_info as pi on pi.operator_id = o.id
+			left join work_group as wg on o.group_id  = wg.id
+			left join operator as gm on gm.id = wg.manage_id
+			left join work_group as ws on wg.fid  = ws.id
+			left join operator as og on og.id = ws.manage_id
+			left join work_group as wb on ws.fid = wb.id
+			left join operator as os on wb.manage_id = os.id
+			left join work_group as wa on wb.fid = wa.id
+			left join operator as ao on wa.manage_id=ao.id
+			left join dd_area as da on wa.city_id=da.id
+		where pi.is_tuoke = 1 and o.id &gt; 0 and ((o.person_status in (0,4) and pi.entry_date&lt;'2018-08-10' or pi.entry_date is null or pi.entry_date ='') or (o.person_status not in (0,4) and (pi.apply_leave_date&gt;'2018-08-03' or pi.leave_date&gt;='2018-08-03'))) order by ws.id</string>
+		<string>SELECT o.id as tuoke_id,o.account as mobile,o.nickname as nickname,o.grade as grade,pi.entry_date as entry_date,o.person_status,wg.`name` as group_name, wg.`id` as group_id,gm.nickname as group_manager,gm.id as group_manager_id,
+            ws.`name` as work_site,ws.`id` as work_site_id,og.`nickname` as site_name,og.`id` as site_id,
+            wb.`name` as bankuai,os.nickname as bankuai_manager,os.id as bankuai_manager_id,
+            wa.`name` as area,ao.nickname as area_manager,ao.id as area_manager_id,da.`name` as city
+	  	FROM operator as o 
+		left join personnel_info as pi on pi.operator_id = o.id
+			left join work_group as wg on o.group_id  = wg.id
+			left join operator as gm on gm.id = wg.manage_id
+			left join work_group as ws on wg.fid  = ws.id
+			left join operator as og on og.id = ws.manage_id
+			left join work_group as wb on ws.fid = wb.id
+			left join operator as os on wb.manage_id = os.id
+			left join work_group as wa on wb.fid = wa.id
+			left join operator as ao on wa.manage_id=ao.id
+			left join dd_area as da on wa.city_id=da.id
+		where pi.is_tuoke = 1 and o.id &gt; 0 and ((o.person_status in (0,4) and pi.entry_date&lt;'2018-08-10' or pi.entry_date is null or pi.entry_date ='') or (o.person_status not in (0,4) and (pi.apply_leave_date&gt;2018-08-03 or pi.leave_date&gt;='2018-08-03'))) order by ws.id</string>
+		<string>select `apply_leave_date`,`leave_date` from `personnel_info` where leave_date&gt;'2018-07-01'</string>
+		<string>select `apply_leave_date`,`leave_date` from `personnel_info` where apply_leave_date!=''</string>
+		<string>select `apply_leave_date`,`leave_date` from `personnel_info` limit 1000</string>
+		<string>select `apply_leave_date`,`leave_date` from `personnel_info` limit 100</string>
+		<string>CREATE TABLE `rentable_house` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `house_id` int(10) unsigned DEFAULT '0' COMMENT '房源id',
+  `house_detail` varchar(100) DEFAULT '' COMMENT '房源详细地址',
+  `house_main_image` varchar(255) DEFAULT '' COMMENT '主图 :存在则有图',
+  `lan_co_id` int(10) unsigned DEFAULT '0' COMMENT '机构id',
+  `agency_name` varchar(100) DEFAULT '' COMMENT '机构名称',
+  `agency_type` tinyint(1) unsigned DEFAULT '0' COMMENT '机构性质:0中介公司,1大房东公司,2二房东公司,3公寓',
+  `subdistrict_id` int(10) unsigned DEFAULT '0' COMMENT '小区id',
+  `subdistrict` varchar(100) DEFAULT '' COMMENT '小区名称',
+  `dd_call_id` int(10) unsigned DEFAULT '0' COMMENT '小区所属据点id',
+  `area_name` varchar(100) DEFAULT '' COMMENT '据点名称',
+  `side_id` int(10) unsigned DEFAULT '0' COMMENT '所属工作站id',
+  `work_site` varchar(100) DEFAULT '' COMMENT '工作站',
+  `bankuai` varchar(100) DEFAULT '' COMMENT '板块',
+  `bankuai_id` int(10) unsigned DEFAULT '0' COMMENT '板块id',
+  `city` varchar(100) DEFAULT '' COMMENT '城市',
+  `city_id` int(10) unsigned DEFAULT '0' COMMENT '城市id',
+  `area` varchar(225) DEFAULT '' COMMENT '区域',
+  `area_id` int(10) unsigned DEFAULT '0' COMMENT '区域id',
+  `create_time` int(10) unsigned DEFAULT '0' COMMENT '创建时间',
+  `create_date` varchar(100) DEFAULT '' COMMENT '记录日期',
+  `account_date` varchar(100) DEFAULT '0' COMMENT '记录开始的日期',
+  `virtual_house_id` int(10) unsigned DEFAULT '0' COMMENT '所属房型房源id',
+  `virtual_house_main_image` varchar(255) DEFAULT '' COMMENT '所属房型房源主图',
+  PRIMARY KEY (`id`),
+  KEY `idx_date` (`account_date`),
+  KEY `idx_account_date` (`account_date`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='可租房源情况表'</string>
+		<string>CREATE TABLE `rentable_house` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `house_id` int(10) unsigned DEFAULT '0' COMMENT '房源id',
+  `house_detail` varchar(100) DEFAULT '' COMMENT '房源详细地址',
+  `house_main_image` varchar(255) DEFAULT '' COMMENT '主图 :存在则有图',
+  `lan_co_id` int(10) unsigned DEFAULT '0' COMMENT '机构id',
+  `agency_name` varchar(100) DEFAULT '' COMMENT '机构名称',
+  `agency_type` tinyint(1) unsigned DEFAULT '0' COMMENT '机构性质:0中介公司,1大房东公司,2二房东公司,3公寓',
+  `subdistrict_id` int(10) unsigned DEFAULT '0' COMMENT '小区id',
+  `subdistrict` varchar(100) DEFAULT '' COMMENT '小区名称',
+  `dd_call_id` int(10) unsigned DEFAULT '0' COMMENT '小区所属据点id',
+  `area_name` varchar(100) DEFAULT '' COMMENT '据点名称',
+  `side_id` int(10) unsigned DEFAULT '0' COMMENT '所属工作站id',
+  `work_site` varchar(100) DEFAULT '' COMMENT '工作站',
+  `bankuai` varchar(100) DEFAULT '' COMMENT '板块',
+  `bankuai_id` int(10) unsigned DEFAULT '0' COMMENT '板块id',
+  `city` varchar(100) DEFAULT '' COMMENT '城市',
+  `city_id` int(10) unsigned DEFAULT '0' COMMENT '城市id',
+  `area` varchar(225) DEFAULT '' COMMENT '区域',
+  `area_id` int(10) unsigned DEFAULT '0' COMMENT '区域id',
+  `create_time` int(10) unsigned DEFAULT '0' COMMENT '创建时间',
+  `create_date` varchar(100) DEFAULT '' COMMENT '记录日期',
+  `account_date` varchar(100) DEFAULT '0' COMMENT '记录开始的日期',
+  `virtual_house_id` int(10) unsigned DEFAULT '0' COMMENT '所属房型房源id',
+  `virtual_house_main_image` varchar(255) DEFAULT '' COMMENT '所属房型房源主图',
+  PRIMARY KEY (`id`),
+  KEY `idx_date` (`account_date`),
+  KEY `idx_account_date` (`account_date`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='可租房源情况表'；</string>
+		<string>alter table `rentable_house` add `virtual_house_main_image` varchar(255) NOT NULL DEFAULT '' comment '所属房型房源主图'</string>
+		<string>alter table `rentable_house` add virtual_house_id int(10) not null default 0 comment '所属房源房型id'</string>
+		<string>select virtual_house_id,id from house order by id desc limit 100</string>
+		<string>select distinct apply_leave_date from personnel_info</string>
+		<string>select apply_leave_date from personnel_info</string>
+		<string>SELECT s.`name` as '小区名称',h.room_detail as '门牌号',h.room_name as '房间号',h.lan_name as '房东姓名',h.lan_mobile as '房东电话',hs.house_id as '房源ID',CASE hs.is_soft_delete
+WHEN 1 then '下架' 
+when 0 then '上架'
+END,
+FROM_UNIXTIME(hs.create_time) as '时间' 
+from house_soft_soldout_log hs
+LEFT JOIN house h on h.id = hs.house_id
+LEFT JOIN subdistrict s on s.id = hs.subdistrict_id</string>
+		<string>ELECT s.`name` as '小区名称',h.room_detail as '门牌号',h.room_name as '房间号',h.lan_name as '房东姓名',h.lan_mobile as '房东电话',hs.house_id as '房源ID',CASE hs.is_soft_delete
+WHEN 1 then '下架' 
+when 0 then '上架'
+END,
+FROM_UNIXTIME(hs.create_time) as '时间' 
+from house_soft_soldout_log hs
+LEFT JOIN house h on h.id = hs.house_id
+LEFT JOIN subdistrict s on s.id = hs.subdistrict_id</string>
+		<string>select * from `dd_subway` where name like '%7%'</string>
+		<string>select * from `dd_subway` where name like '%0%'</string>
+		<string>select * from `dd_subway` where name like '%10%'</string>
+		<string>select * from `dd_subway` where name like '%十七%'</string>
+		<string>select * from `dd_subway` where name like '%17%'</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.5.42</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>

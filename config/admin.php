@@ -145,7 +145,7 @@ return [
     /*
      * Background image in login page
      */
-    'login_background_image' => '',
+    'login_background_image' => '/vendor/laravel-admin/AdminLTE/dist/img/user2-160x160.jpg',
 
     /*
      * Version displayed in footer.
