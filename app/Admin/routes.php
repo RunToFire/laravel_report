@@ -11,9 +11,12 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+    $router->get('sitedetail/area','SiteDetailController@area');
+    $router->get('sitedetail/index','SiteDetailController@index');
 
-    $router->get('users/thelist', 'UserController@thelist');
-    $router->resource('users', UserController::class);
+    $router->resources([
+        'sitedetail'=>SiteDetailController::class,
+    ]);
 
 
 });
