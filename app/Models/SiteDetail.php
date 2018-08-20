@@ -15,20 +15,6 @@ class SiteDetail extends Model
     //对应表
     protected $table = "site_detail";
 
-    /**
-     * select city
-     * @return array
-     */
-    public function scopeCity()
-    {
-        $data = "2018-06-04";
-        return $this->where('account_date',$data)->groupBy('city_id');
-    }
-    public function scopeArea()
-    {
-        $data = "2018-06-04";
-        return $this->where('account_date',$data)->groupBy('area_id');
-    }
 
 
 }

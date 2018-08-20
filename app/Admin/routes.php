@@ -11,6 +11,8 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+    $router->get('sitedetail/site','SiteDetailController@site');
+    $router->get('sitedetail/plate','SiteDetailController@plate');
     $router->get('sitedetail/area','SiteDetailController@area');
     $router->get('sitedetail/index','SiteDetailController@index');
 

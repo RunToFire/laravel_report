@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Admin\Controllers;
+use App\Models\ScoreGrade;
 use App\Models\SiteDetail;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -10,6 +11,7 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class SiteDetailController extends Controller
 {
@@ -42,13 +44,16 @@ class SiteDetailController extends Controller
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->disableIdFilter();
                 $filter->equal('city_id', '城市')
-                    ->select(SiteDetail::city()->pluck('city', 'city_id'))
+                    ->select(ScoreGrade::city()->pluck('city', 'city_id'))
                     ->load('area_id', '/admin/sitedetail/area');
 
-                $filter->equal('area_id', '区域')->select();
-                    ->load('bankuai_id', '/admin/sitedetail/bankuai');
-//
-                $filter->equal('bankuai_id', '板块')->select();
+                $filter->equal('area_id', '区域')->select()
+                    ->load('bankuai_id', '/admin/sitedetail/plate');
+
+                $filter->equal('bankuai_id', '板块')->select()
+                    ->load('work_site_id','/admin/sitedetail/site');
+
+                $filter->equal('work_site_id', '工作站')->select();
             });
             $grid->setView('admin.grid.sitedetail');
 
@@ -68,12 +73,36 @@ class SiteDetailController extends Controller
             $form->display('updated_at', 'Updated At');
         });
     }
-    public function area()
+    /**
+     * get area options.
+     *
+     * @return array
+     */
+    public function area(Request $request)
     {
-//        var_dump(11);die;
-        $city_id = $_GET['q'];
-//        var_dump($city_id);die;
-        return SiteDetail::area()->where('city_id', $city_id)->get(['area_id as id', DB::raw('area as text')]);
+        $cityId = $request->get('q');
+        return ScoreGrade::area()->where('city_id', $cityId)->get(['area_id as id', DB::raw('area as text')]);
+    }
+    /**
+     * get Plate options.
+     *
+     * @return array
+     */
+    public function plate(Request $request)
+    {
+        $areaId = $request->get('q');
+        return ScoreGrade::plate()->where('area_id', $areaId)->get(['bankuai_id as id', DB::raw('bankuai as text')]);
+    }
+
+    /**
+     * get Plate options.
+     *
+     * @return array
+     */
+    public function site(Request $request)
+    {
+        $bankuai_id = $request->get('q');
+        return ScoreGrade::site()->where('bankuai_id', $bankuai_id)->get(['work_site_id as id', DB::raw('work_site as text')]);
     }
 
 }
