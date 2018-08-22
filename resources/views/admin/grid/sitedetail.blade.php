@@ -19,9 +19,7 @@
             <tr>
                 <th>
                     <div class="w-60">记录<br/>日期</div>
-
                 </th>
-
                 <th ><div class="w-60">工作站</div></th>
                 <th>板经</th>
                 <th>区经</th>

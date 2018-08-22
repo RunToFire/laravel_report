@@ -25,9 +25,9 @@ class SiteDetailController extends Controller
     public function index()
     {
         return Admin::content(function (Content $content) {
-            $content->header('数据管理');
-            $content->description('站点详情');
-            $content->body($this->grid());
+            $content->header('站点管理');
+            $content->description('站点周报');
+            $content->body($this->grid_one());
         });
     }
 
@@ -36,7 +36,7 @@ class SiteDetailController extends Controller
      *
      * @return Grid
      */
-    protected function grid()
+    protected function grid_one()
     {
         return Admin::grid(SiteDetail::class, function (Grid $grid) {
 
@@ -58,6 +58,46 @@ class SiteDetailController extends Controller
             });
             $grid->setView('admin.grid.sitedetail');
 
+        });
+    }
+    /**
+     * Index interface.
+     *
+     * @return Content
+     */
+    public function siteday()
+    {
+        return Admin::content(function (Content $content) {
+            $content->header('站点管理');
+            $content->description('站点日报');
+            $content->body($this->grid());
+        });
+    }
+    /**
+     * Make a grid builder.
+     *
+     * @return Grid
+     */
+    protected function grid()
+    {
+        return Admin::grid(SiteDetail::class, function (Grid $grid) {
+
+            $grid->id('IDs')->sortable();
+            $grid->filter(function (Grid\Filter $filter) {
+                $filter->disableIdFilter();
+                $filter->between('account_date', trans('记录日期'))->datetime();
+                $filter->equal('city_id', '城市')
+                    ->select(ScoreGrade::city()->pluck('city', 'city_id'))
+                    ->load('area_id', '/admin/score/area');
+
+                $filter->equal('area_id', '区域')->select()
+                    ->load('bankuai_id', '/admin/score/plate');
+
+                $filter->equal('bankuai_id', '板块')->select()
+                    ->load('work_site_id', '/admin/score/site');
+
+                $filter->equal('work_site_id', '工作站')->select();
+            });
         });
     }
 }

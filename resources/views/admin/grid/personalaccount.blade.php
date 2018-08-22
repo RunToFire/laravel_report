@@ -95,7 +95,12 @@
                 <td>{!! $row->column('attendance_days') !!}</td>
                 <td>{!! $row->column('entry_days') !!}</td>
                 <td>{!! $row->column('entry_weeks') !!}</td>
-                <td>{!! $row->column('is_leave') !!}</td>
+                @if($row->column('is_leave') == 1 || $row->column('is_leave') == 4 )
+                    <td>在职</td>
+                @else
+                    <td>离职</td>
+                @endif
+                {{--<td>{!! $row->column('is_leave') !!}</td>--}}
                 <td>{!! $row->column('new_contract') !!}</td>
                 <td>{!! $row->column('qualified_num') !!}</td>
                 <td>{!! $row->column('average_contract_account') !!}</td>
