@@ -43,15 +43,16 @@ class SiteDetailController extends Controller
             $grid->id('IDs')->sortable();
             $grid->filter(function (Grid\Filter $filter) {
                 $filter->disableIdFilter();
+                $filter->between('account_date', trans('记录日期'))->datetime();
                 $filter->equal('city_id', '城市')
                     ->select(ScoreGrade::city()->pluck('city', 'city_id'))
-                    ->load('area_id', '/admin/sitedetail/area');
+                    ->load('area_id', '/admin/score/area');
 
                 $filter->equal('area_id', '区域')->select()
-                    ->load('bankuai_id', '/admin/sitedetail/plate');
+                    ->load('bankuai_id', '/admin/score/plate');
 
                 $filter->equal('bankuai_id', '板块')->select()
-                    ->load('work_site_id','/admin/sitedetail/site');
+                    ->load('work_site_id','/admin/score/site');
 
                 $filter->equal('work_site_id', '工作站')->select();
             });
@@ -59,50 +60,4 @@ class SiteDetailController extends Controller
 
         });
     }
-
-    /**
-     * Make a form builder.
-     *
-     * @return Form
-     */
-    protected function form()
-    {
-        return Admin::form(SiteDetail::class, function (Form $form) {
-            $form->display('id', 'ID');
-            $form->display('created_at', 'Created At');
-            $form->display('updated_at', 'Updated At');
-        });
-    }
-    /**
-     * get area options.
-     *
-     * @return array
-     */
-    public function area(Request $request)
-    {
-        $cityId = $request->get('q');
-        return ScoreGrade::area()->where('city_id', $cityId)->get(['area_id as id', DB::raw('area as text')]);
-    }
-    /**
-     * get Plate options.
-     *
-     * @return array
-     */
-    public function plate(Request $request)
-    {
-        $areaId = $request->get('q');
-        return ScoreGrade::plate()->where('area_id', $areaId)->get(['bankuai_id as id', DB::raw('bankuai as text')]);
-    }
-
-    /**
-     * get Plate options.
-     *
-     * @return array
-     */
-    public function site(Request $request)
-    {
-        $bankuai_id = $request->get('q');
-        return ScoreGrade::site()->where('bankuai_id', $bankuai_id)->get(['work_site_id as id', DB::raw('work_site as text')]);
-    }
-
 }

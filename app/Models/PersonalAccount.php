@@ -15,4 +15,11 @@ class PersonalAccount extends Model
     //对应表
     protected $table = "personal_account";
 
+    /**
+     * get person belong same site
+     */
+    public function site()
+    {
+        return $this->belongsTo('App\Models\ScoreGrade','work_site_id','account_date');
+    }
 }

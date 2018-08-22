@@ -51,6 +51,12 @@ class ScoreGrade extends Model
         $data = "2018-06-04";
         return $this->where('account_date',$data)->groupBy('work_site_id');
     }
-
+    /**
+     * get person from this site
+     */
+    public function person()
+    {
+        return $this->hasMany('App\Models\PersonalAccount','work_site_id','account_data');
+    }
 
 }
