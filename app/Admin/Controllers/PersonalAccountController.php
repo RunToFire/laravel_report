@@ -60,7 +60,7 @@ class PersonalAccountController extends Controller
                 $filter->equal('work_site', '工作站')->select();
             });
             $grid->exporter(new ExcelExpoter(1));
-            $grid->setView('admin.grid.personalaccount');
+//            $grid->setView('admin.grid.personalaccount');
 
         });
     }
